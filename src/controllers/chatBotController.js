@@ -154,7 +154,7 @@ function checkAndGetIndex(request_text) {
   let result = [];
 
   for (let separator of separators) {
-    const parts = input.split(separator);
+    const parts = request_text.split(separator);
     if (parts.length === 2) {
       const part1Int = parseInt(parts[0]);
       const part2Int = parseInt(parts[1]);
