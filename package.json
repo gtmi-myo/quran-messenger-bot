@@ -1,6 +1,5 @@
 {
   "name": "botfacebooknodejs",
-  "type": "module",
   "version": "1.0.0",
   "description": "messenger bot nodejs witAI",
   "main": "server.js",
