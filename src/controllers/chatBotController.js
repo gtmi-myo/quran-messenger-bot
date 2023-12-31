@@ -254,4 +254,3 @@ module.exports = {
   postWebhook: postWebhook,
   getWebhook: getWebhook,
 };
-module.exports.default = module.exports;
