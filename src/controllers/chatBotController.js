@@ -151,7 +151,7 @@ function callSendAPI(sender_psid, response) {
 
 function checkAndGetIndex(request_text) {
   const separators = [":", ";", "/"];
-  let result = ["error", nil];
+  let result = ["error", null];
 
   for (let separator of separators) {
     const parts = request_text.split(separator);
