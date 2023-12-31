@@ -62,7 +62,7 @@ function handleMessage(sender_psid, received_message) {
   let response = "";
 
   if (received_message.text) {
-    indexes = checkAndGetIndex(received_message.text);
+    const indexes = checkAndGetIndex(received_message.text);
     if (indexes[0] === "error") {
       response = "Please enter the correct format";
     } else {
