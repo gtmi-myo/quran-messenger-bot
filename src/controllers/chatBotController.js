@@ -3,7 +3,9 @@ import request from "request";
 const path = require("path");
 const fs = require("fs");
 const verses = loadVerses();
-console.log("verses", verses);
+const quran = loadQuranVerses();
+const myan1 = loadTranslationVerses();
+const startLine = loadStartIndex();
 
 let postWebhook = (req, res) => {
   // Parse the request body from the POST
@@ -77,7 +79,14 @@ function handleMessage(sender_psid, received_message) {
       indexes[1]
     );
     if (validateSurahAndIndexResult === "success") {
-      response = `You sent the message: "${received_message.text}". Now send me an image!`;
+      const quranVerse = quran[startLine[indexes[0] - 1] + indexes[1] - 1];
+      const myan1Verse = myan1[startLine[indexes[0] - 1] + indexes[1] - 1];
+      response = `Surah ${indexes[0]} Ayah ${indexes[1]}
+        Quran -
+        "${quranVerse}"
+
+        TranslationInBurmese -
+        "${myan1Verse}"`;
     } else {
       response = validateSurahAndIndexResult;
     }
@@ -204,6 +213,51 @@ function validateSurahAndIndex(suranNo, verseNo) {
   if (verseNo < 1 || verseNo > totalVerses)
     return `There is only ${totalVerses} verses in Surah ${suranNo} So enter a Number between 1 to ${totalVerses}`;
   else return "success";
+}
+
+function loadQuranVerses() {
+  const filePath = path.join(__dirname, "..", "data", "quran.txt");
+  let quran = [];
+  try {
+    const data = fs.readFileSync(filePath, "utf8");
+    const lines = data.split(/\r?\n/);
+    for (let line of lines) {
+      quran.push(parseInt(line));
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return quran;
+}
+
+function loadTranslationVerses() {
+  const filePath = path.join(__dirname, "..", "data", "myan1.txt");
+  let myan1 = [];
+  try {
+    const data = fs.readFileSync(filePath, "utf8");
+    const lines = data.split(/\r?\n/);
+    for (let line of lines) {
+      myan1.push(parseInt(line));
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return myan1;
+}
+
+function loadStartIndex() {
+  const filePath = path.join(__dirname, "..", "data", "startline.txt");
+  let start = [];
+  try {
+    const data = fs.readFileSync(filePath, "utf8");
+    const lines = data.split(/\r?\n/);
+    for (let line of lines) {
+      start.push(parseInt(line));
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return start;
 }
 
 module.exports = {
