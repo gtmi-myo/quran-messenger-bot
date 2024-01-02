@@ -3,6 +3,7 @@ import request from "request";
 const path = require("path");
 const fs = require("fs");
 const verses = loadVerses();
+console.log("verses", verses);
 const quran = loadQuranVerses();
 const myan1 = loadTranslationVerses();
 const startLine = loadStartIndex();
