@@ -1,6 +1,8 @@
 require("dotenv").config();
 import request from "request";
 
+const verses = loadVerses();
+
 let postWebhook = (req, res) => {
   // Parse the request body from the POST
   let body = req.body;
@@ -67,8 +69,15 @@ function handleMessage(sender_psid, received_message) {
       response = `Sorry you've enter wrong keyword.
         The correct format for ask translation is surah number:ayah number.
         For example. 1:1`;
-    } else {
+    }
+    const validateSurahAndIndexResult = validateSurahAndIndex(
+      indexes[0],
+      indexes[1]
+    );
+    if (validateSurahAndIndexResult === "success") {
       response = `You sent the message: "${received_message.text}". Now send me an image!`;
+    } else {
+      response = validateSurahAndIndexResult;
     }
   } else if (received_message.attachments) {
     let attachment_url = received_message.attachments[0].payload.url;
@@ -169,6 +178,30 @@ function checkAndGetIndex(request_text) {
     }
   }
   return result;
+}
+
+function loadVerses() {
+  const filePath = "../data/total.txt";
+  const verses = [];
+  try {
+    const data = fs.readFileSync(filePath, "utf8");
+    const lines = data.split(/\r?\n/);
+    for (let line of lines) {
+      verses.push(parseInt(line));
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return verses;
+}
+
+function validateSurahAndIndex(suranNo, verseNo) {
+  if (suranNo < 1 || suranNo > 114)
+    return "There is only 114 surahs in Holy Quran So enter a Number between 1 to 114";
+  totalVerses = verses[suranNo - 1];
+  if (verseNo < 1 || verseNo > totalVerses)
+    return `There is only ${totalVerses} verses in Surah ${suranNo} So enter a Number between 1 to ${totalVerses}`;
+  return "success";
 }
 
 module.exports = {
