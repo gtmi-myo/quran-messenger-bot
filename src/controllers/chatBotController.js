@@ -3,13 +3,9 @@ import request from "request";
 const path = require("path");
 const fs = require("fs");
 const verses = loadVerses();
-console.log("verses", verses);
 const quran = loadQuranVerses();
-console.log("quran", quran);
 const myan1 = loadTranslationVerses();
-console.log("myan1", myan1);
 const startLine = loadStartIndex();
-console.log("startLine", startLine);
 
 let postWebhook = (req, res) => {
   // Parse the request body from the POST
@@ -86,6 +82,7 @@ function handleMessage(sender_psid, received_message) {
       const quranVerse = quran[startLine[indexes[0] - 1] + indexes[1] - 1];
       const myan1Verse = myan1[startLine[indexes[0] - 1] + indexes[1] - 1];
       response = `Surah ${indexes[0]} Ayah ${indexes[1]}
+      
         Quran -
         "${quranVerse}"
 
