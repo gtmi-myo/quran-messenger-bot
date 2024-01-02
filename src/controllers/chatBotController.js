@@ -3,6 +3,7 @@ import request from "request";
 
 const fs = require("fs");
 const verses = loadVerses();
+console.log("verses", verses);
 
 let postWebhook = (req, res) => {
   // Parse the request body from the POST
@@ -183,17 +184,17 @@ function checkAndGetIndex(request_text) {
 
 function loadVerses() {
   const filePath = "../data/total.txt";
-  let verses = [];
+  let total = [];
   try {
     const data = fs.readFileSync(filePath, "utf8");
     const lines = data.split(/\r?\n/);
     for (let line of lines) {
-      verses.push(parseInt(line));
+      total.push(parseInt(line));
     }
   } catch (err) {
     console.error(err);
   }
-  return verses;
+  return total;
 }
 
 function validateSurahAndIndex(suranNo, verseNo) {
