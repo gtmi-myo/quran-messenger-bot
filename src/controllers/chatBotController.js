@@ -1,6 +1,5 @@
 require("dotenv").config();
 import request from "request";
-
 const fs = require("fs");
 const verses = loadVerses();
 console.log("verses", verses);
@@ -183,7 +182,7 @@ function checkAndGetIndex(request_text) {
 }
 
 function loadVerses() {
-  const filePath = "../data/total.txt";
+  const filePath = path.join(__dirname, "..", "data", "total.txt");
   let total = [];
   try {
     const data = fs.readFileSync(filePath, "utf8");
