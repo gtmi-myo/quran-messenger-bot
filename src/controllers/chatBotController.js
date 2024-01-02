@@ -226,7 +226,7 @@ function loadQuranVerses() {
     const data = fs.readFileSync(filePath, "utf8");
     const lines = data.split(/\r?\n/);
     for (let line of lines) {
-      quran.push(parseInt(line));
+      quran.push(line);
     }
   } catch (err) {
     console.error(err);
@@ -241,7 +241,7 @@ function loadTranslationVerses() {
     const data = fs.readFileSync(filePath, "utf8");
     const lines = data.split(/\r?\n/);
     for (let line of lines) {
-      myan1.push(parseInt(line));
+      myan1.push(line);
     }
   } catch (err) {
     console.error(err);
