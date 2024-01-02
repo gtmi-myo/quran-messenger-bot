@@ -183,7 +183,7 @@ function checkAndGetIndex(request_text) {
 
 function loadVerses() {
   const filePath = "../data/total.txt";
-  const verses = [];
+  let verses = [];
   try {
     const data = fs.readFileSync(filePath, "utf8");
     const lines = data.split(/\r?\n/);
@@ -202,7 +202,7 @@ function validateSurahAndIndex(suranNo, verseNo) {
   const totalVerses = verses[suranNo - 1];
   if (verseNo < 1 || verseNo > totalVerses)
     return `There is only ${totalVerses} verses in Surah ${suranNo} So enter a Number between 1 to ${totalVerses}`;
-  return "success";
+  else return "success";
 }
 
 module.exports = {
