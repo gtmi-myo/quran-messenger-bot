@@ -198,7 +198,7 @@ function loadVerses() {
 function validateSurahAndIndex(suranNo, verseNo) {
   if (suranNo < 1 || suranNo > 114)
     return "There is only 114 surahs in Holy Quran So enter a Number between 1 to 114";
-  totalVerses = verses[suranNo - 1];
+  const totalVerses = verses[suranNo - 1];
   if (verseNo < 1 || verseNo > totalVerses)
     return `There is only ${totalVerses} verses in Surah ${suranNo} So enter a Number between 1 to ${totalVerses}`;
   return "success";
