@@ -5,8 +5,11 @@ const fs = require("fs");
 const verses = loadVerses();
 console.log("verses", verses);
 const quran = loadQuranVerses();
+console.log("quran", quran);
 const myan1 = loadTranslationVerses();
+console.log("myan1", myan1);
 const startLine = loadStartIndex();
+console.log("startLine", startLine);
 
 let postWebhook = (req, res) => {
   // Parse the request body from the POST
