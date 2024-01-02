@@ -64,7 +64,8 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.text) {
     const indexes = checkAndGetIndex(received_message.text);
     if (indexes[0] === "error") {
-      response = "Please enter the correct format";
+      response =
+        'Please enter with correct format of the verses to get translation eg. "1:2"';
     } else {
       response = `You sent the message: "${received_message.text}". Now send me an image!`;
     }
