@@ -1,5 +1,6 @@
 require("dotenv").config();
 import request from "request";
+const path = require("path");
 const fs = require("fs");
 const verses = loadVerses();
 console.log("verses", verses);
