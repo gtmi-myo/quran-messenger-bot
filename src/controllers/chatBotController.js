@@ -2,6 +2,7 @@ require("dotenv").config();
 import request from "request";
 
 const verses = loadVerses();
+const fs = require("fs");
 
 let postWebhook = (req, res) => {
   // Parse the request body from the POST
